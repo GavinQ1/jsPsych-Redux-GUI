@@ -28,7 +28,7 @@
 
 .TimelineNode-Editor-Sheet {
 	overflow-y: auto;
-	overflow-x: scroll;
+	overflow-x: auto;
 	flex-grow: 1;
 }
 
