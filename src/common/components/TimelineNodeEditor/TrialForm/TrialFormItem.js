@@ -3,7 +3,8 @@ import TextField from 'material-ui-next/TextField';
 import { MenuItem } from 'material-ui-next/Menu';
 import IconButton from 'material-ui-next/IconButton';
 import Tooltip from 'material-ui-next/Tooltip';
-import AutoComplete from 'material-ui/AutoComplete';
+
+import SelectField from 'material-ui/SelectField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 // import Divider from 'material-ui/Divider';
 // import { ListItem } from 'material-ui/List';
@@ -107,14 +108,22 @@ const generateFieldProps = (parameterValue, parameterInfo) => {
 			val = '[Timeline Variable]';
 			break;
 		default:
-			disabled = false;
+			if (parameterInfo.array) {
+				if (Array.isArray(val)) {
+					val = val.length > 1 ? `${val.length} Array Items` : `${val.length} Array Item`;
+				} else {
+					val = '0 Array Item';
+				}
+			} else {
+				disabled = false;
+			}
 	}
 
 	return {
 		value: val,
 		disabled: disabled,
 		label: parameterInfo.pretty_name,
-		title: parameterInfo.pretty_name,
+		title: parameterInfo.description,
 		required: isRequired,
 		helperText: error ? 'This field is required.' : '',
 		error: error,
@@ -142,9 +151,6 @@ export default class TrialFormItem extends React.Component {
 		openTimelineVariable: false,
 		keyListStr: "",
 		useKeyListStr: false,
-		useFileStr: false,
-		fileListStr: "",
-		fileStr: "",
 		subFormCollapse: false,
 	}
 
@@ -152,18 +158,6 @@ export default class TrialFormItem extends React.Component {
 		this.setState({
 			subFormCollapse: !this.state.subFormCollapse
 		})
-	}
-
-	setFileListStr = (str) => {
-		this.setState({
-			fileListStr: str
-		});
-	}
-
-	setFileStr = (str) => {
-		this.setState({
-			fileStr: str
-		});
 	}
 
 	setKeyListStr = (str) => {
@@ -212,11 +206,7 @@ export default class TrialFormItem extends React.Component {
 	renderLabel = (param) => {
 
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
-		// let isRequired = false;
-		// if (parameterInfo.hasOwnProperty('default')) {
-		// 	isRequired = parameterInfo.defaultValue === undefined;
-		// 	// + (isRequired ? '*' : '')
-		// }
+
 		return (
 		<p
 			className="Trial-Form-Label-Container"
@@ -274,6 +264,23 @@ export default class TrialFormItem extends React.Component {
 		)
 	}
 
+	appendArrayEditor = (param, autoConvertToArrayComponent=true) => {
+		let parameterValue = locateNestedParameterValue(this.props.parameters, param);
+		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
+		let node = null;
+		if (parameterInfo.array && autoConvertToArrayComponent) {
+			node = (
+				<ArrayEditor
+					targetArray={parameterValue.value}
+					title={`${parameterInfo.pretty_name}: `}
+					keyName={param}
+					submitCallback={(obj) => { this.props.setObject(param, obj); }}
+				/>
+			)
+		}
+		return node;
+	}
+
 	renderFieldContent = (param, node, autoConvertToArrayComponent=true) => {
 
 		let parameterValue = locateNestedParameterValue(this.props.parameters, param);
@@ -316,6 +323,7 @@ export default class TrialFormItem extends React.Component {
 		return (
 		  <div className="Trial-Form-Item-Container">
 		    	{node}
+		    	{this.appendArrayEditor(param)}
 				{this.appendFunctionEditor(param)}
 				{this.appendTimelineVariable(param)}
 		  </div>
@@ -344,6 +352,7 @@ export default class TrialFormItem extends React.Component {
 		return (
 			<div className="Trial-Form-Item-Container">
 		    	{node}
+		    	{this.appendArrayEditor(param)}
 				{this.appendFunctionEditor(param)}
 				{this.appendTimelineVariable(param)}
 		  	</div>
@@ -376,6 +385,7 @@ export default class TrialFormItem extends React.Component {
 		return (
 			<div className="Trial-Form-Item-Container">
 		    	{node}
+		    	{this.appendArrayEditor(param)}
 				{this.appendFunctionEditor(param)}
 				{this.appendTimelineVariable(param)}
 		  	</div>
@@ -511,6 +521,7 @@ export default class TrialFormItem extends React.Component {
 		return (
 			<div className="Trial-Form-Item-Container">
 		    	{node}
+		    	{this.appendArrayEditor(param)}
 		    	{inOtherMode ? null : toggleAllKey}
 		    	{isAllKey ? null : this.appendFunctionEditor(param)}
 				{isAllKey ? null : this.appendTimelineVariable(param)}
@@ -546,6 +557,7 @@ export default class TrialFormItem extends React.Component {
 		return (
 			<div className="Trial-Form-Item-Container">
 		    	{node}
+		    	{this.appendArrayEditor(param)}
 				{this.appendFunctionEditor(param)}
 				{this.appendTimelineVariable(param)}
 		  	</div>
@@ -558,100 +570,63 @@ export default class TrialFormItem extends React.Component {
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
 
 		let props = generateFieldProps(parameterValue, parameterInfo);
-		let selectedFilesString = processMediaPathTag(props.value);
-		props.value = this.state.useFileStr ? this.state.fileListStr : selectedFilesString;
 
 		let node = (
-			(multiSelect) ?
-				<TextField 
-					id={"Selected-File-Input-"+param}
-					multiLine={true}
-					rowsMax={3}
-					rows={1}
-					fullWidth={true}
-					{...props}
-					onChange={(e, v) => { 
-						this.setFileListStr(v); 
-					}}
-					onFocus={() => {
-						this.setFileListStr(selectedFilesString);
-						this.setState({
-							useFileStr: true
-						});
-					}}
-					onBlur={() => { 
-						this.props.fileArrayInput(
-							param,
-							this.state.fileListStr, 
-							this.props.s3files.Prefix, 
-							this.props.filenames);
-						this.setFileListStr(selectedFilesString);
-						this.setState({
-							useFileStr: false
-						});
-					}}
-					onKeyPress={(e) => {
-						if (e.which === 13) {
-							document.activeElement.blur();
-						}
-					}}
-				/> :
-				<AutoComplete
-					id={"Selected-File-Input-"+param}
-					fullWidth={true}
-					{...props}
-					floatingLabelText={props.label}
-					searchText={(this.state.useFileStr) ? this.state.fileStr : selectedFilesString}
-					title={selectedFilesString}
-					dataSource={this.props.filenames}
-					filter={(searchText, key) => (searchText === "" || (key.startsWith(searchText) && key !== searchText))}
-					listStyle={{maxHeight: 200, overflowY: 'auto'}}
-					onUpdateInput={(t) => { 
-						this.setFileStr(t); 
-						if (t !== selectedFilesString && this.props.filenames.indexOf(t) > -1) {
-							this.props.autoFileInput(param, t, this.props.s3files.Prefix, this.props.filenames);
-						}
-					}}
-					onFocus={() => {
-						this.setState({
-							useFileStr: true
-						});
-					}}
-					onNewRequest={(s, i) => {
-						if (i !== -1 && s !== selectedFilesString) {
-							this.props.autoFileInput(param, s, this.props.s3files.Prefix, this.props.filenames);
-						} else if (this.state.fileStr !== selectedFilesString) {
-							this.props.autoFileInput(param, this.state.fileStr, this.props.s3files.Prefix, this.props.filenames);
-						}
-						this.setFileStr(selectedFilesString);
-						this.setState({
-							useFileStr: false
-						});
-					}}
-				/>
-		);
+			<SelectField
+				autoWidth
+				id={this.props.id+"-media-selector-"+param}
+				multiple={multiSelect}
+				floatingLabelFixed
+				{...props}
+				onChange={(event, index, value) => {
+		    		this.props.setMedia(param, value);
+		    	}}
+			>
+				{this.props.filenames.map(
+					filename => {
+						let val = `<path>${filename}</path>`;
+						let checked = multiSelect ?
+									  Array.isArray(props.value) && props.value.indexOf(val) > -1 :
+									  props.value === val;
+						return (
+							<MenuItem 
+								key={`${this.props.id}-${filename}`}
+								value={val}
+								insetChildren={true}
+								checked={checked}
+								primaryText={filename}
+							/>
+						)
+					}
+				)}
+			</SelectField>
+		)
 
+		let mediaSelector = (
+			<MediaManager 
+				parameterName={param} 
+				mode={(!multiSelect) ? MediaManagerMode.select : MediaManagerMode.multiSelect}
+				insertCallback={(selected, handleClose) => {
+					this.props.insertFile(
+						param,
+					this.props.s3files,
+					multiSelect,
+					selected,
+					handleClose,
+				);
+
+				}}
+			/>
+		)
+
+		let funcMode = parameterValue.mode == ParameterMode.USE_FUNC;
+		let tvMode = parameterValue.mode == ParameterMode.USE_TV;
+		let inOtherMode = funcMode || tvMode;
 		return (
 			<div className="Trial-Form-Item-Container" >
 		    	{node}
-				{(this.props.parameters[param].mode !== ParameterMode.USE_TV &&
-      				this.props.parameters[param].mode !== ParameterMode.USE_FUNC) ? 
-      				<MediaManager 
-      					parameterName={param} 
-      					mode={(!multiSelect) ? MediaManagerMode.select : MediaManagerMode.multiSelect}
-      					insertCallback={(selected, handleClose) => {
-      						this.props.insertFile(
-      							param,
-								this.props.s3files,
-								multiSelect,
-								selected,
-								handleClose,
-							);
-
-      					}}
-      				/> :
-      				null
-      			}
+		    	{this.appendArrayEditor(param)}
+				{!inOtherMode ? mediaSelector : null}
       			{this.appendFunctionEditor(param)}
 				{this.appendTimelineVariable(param)}
 		  	</div>

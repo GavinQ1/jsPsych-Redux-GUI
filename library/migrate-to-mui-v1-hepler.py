@@ -22,11 +22,11 @@ def resolveIconPath(files):
         wrt = open(f, 'w')
         wrt.write(src)
         wrt.close()
-
-
+        
 def main():
     files = getJSFiles('../src/common/components')
     # resolveIconPath(files)
+
     
 
 if __name__ == '__main__':
