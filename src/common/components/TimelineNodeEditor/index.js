@@ -10,8 +10,8 @@ import TextField from 'material-ui/TextField';
 
 import Draggable from 'react-draggable';
 
-import CloseDrawerHandle from 'material-ui/svg-icons/navigation/chevron-right';
-import OpenDrawer from 'material-ui/svg-icons/navigation/chevron-left';
+import CloseDrawerHandle from 'material-ui-icons/ChevronRight';
+import OpenDrawer from 'material-ui-icons/ChevronLeft';
 import {
 	grey300 as popDrawerColor,
 	grey400 as DrawerHandleColor,

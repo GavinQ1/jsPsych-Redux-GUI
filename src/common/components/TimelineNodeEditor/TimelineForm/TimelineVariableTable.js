@@ -11,15 +11,15 @@ import TextField from 'material-ui/TextField';
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import SvgIcon from 'material-ui/SvgIcon';
 
-import Uncheck from 'material-ui/svg-icons/toggle/star-border';
-import Check from 'material-ui/svg-icons/toggle/star';
-import CheckIcon from 'material-ui/svg-icons/toggle/radio-button-checked';
-import UnCheckIcon from 'material-ui/svg-icons/toggle/radio-button-unchecked';
-import CodeButtonIcon from 'material-ui/svg-icons/action/code';
-import Add from 'material-ui/svg-icons/content/add-circle';
+import Uncheck from 'material-ui-icons/StarBorder';
+import Check from 'material-ui-icons/Star';
+import CheckIcon from 'material-ui-icons/RadioButtonChecked';
+import UnCheckIcon from 'material-ui-icons/RadioButtonUnchecked';
+import CodeButtonIcon from 'material-ui-icons/Code';
+import Add from 'material-ui-icons/AddCircle';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
-import Launch from  'material-ui/svg-icons/action/launch';
-import TableIcon from 'material-ui/svg-icons/action/view-list';
+import Launch from  'material-ui-icons/Launch';
+import TableIcon from 'material-ui-icons/ViewList';
 import {
 	cyan500 as hoverColor,
 	yellow500 as checkColor,

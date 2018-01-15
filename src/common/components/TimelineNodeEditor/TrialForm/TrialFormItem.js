@@ -8,14 +8,14 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 // import Divider from 'material-ui/Divider';
 // import { ListItem } from 'material-ui/List';
 
-import CheckIcon from 'material-ui/svg-icons/toggle/radio-button-checked';
-import UnCheckIcon from 'material-ui/svg-icons/toggle/radio-button-unchecked';
-import BoxCheckIcon from 'material-ui/svg-icons/toggle/check-box';
-import BoxUncheckIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank';
-import DeleteSubItemIcon from 'material-ui/svg-icons/navigation/close';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import CollapseIcon from 'material-ui/svg-icons/navigation/more-horiz';
-import ExpandIcon from 'material-ui/svg-icons/navigation/expand-more';
+import CheckIcon from 'material-ui-icons/RadioButtonChecked';
+import UnCheckIcon from 'material-ui-icons/RadioButtonUnchecked';
+import BoxCheckIcon from 'material-ui-icons/CheckBox';
+import BoxUncheckIcon from 'material-ui-icons/CheckBoxOutlineBlank';
+import DeleteSubItemIcon from 'material-ui-icons/Close';
+import ContentAdd from 'material-ui-icons/Add';
+import CollapseIcon from 'material-ui-icons/MoreHoriz';
+import ExpandIcon from 'material-ui-icons/ExpandMore';
 import {
   green500 as checkColor,
   cyan500 as boxCheckColor,

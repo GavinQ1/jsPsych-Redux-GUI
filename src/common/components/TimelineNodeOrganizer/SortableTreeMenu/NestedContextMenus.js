@@ -4,16 +4,16 @@ import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
-import NewTimelineIcon from 'material-ui/svg-icons/av/playlist-add';
-import NewTrialIcon from 'material-ui/svg-icons/action/note-add';
-import Delete from 'material-ui/svg-icons/action/delete';
-import Duplicate from 'material-ui/svg-icons/content/content-copy';
+import NewTimelineIcon from 'material-ui-icons/PlaylistAdd';
+import NewTrialIcon from 'material-ui-icons/NoteAdd';
+import Delete from 'material-ui-icons/Delete';
+import Duplicate from 'material-ui-icons/ContentCopy';
 
-import SelectAllIcon from 'material-ui/svg-icons/content/select-all';
-import DeselectAllIcon from 'material-ui/svg-icons/content/block';
-import SelectThisOnlyIcon from 'material-ui/svg-icons/device/gps-fixed';
-import CheckIcon from 'material-ui/svg-icons/toggle/radio-button-checked';
-import UnCheckIcon from 'material-ui/svg-icons/toggle/radio-button-unchecked';
+import SelectAllIcon from 'material-ui-icons/SelectAll';
+import DeselectAllIcon from 'material-ui-icons/Block';
+import SelectThisOnlyIcon from 'material-ui-icons/GpsFixed';
+import CheckIcon from 'material-ui-icons/RadioButtonChecked';
+import UnCheckIcon from 'material-ui-icons/RadioButtonUnchecked';
 
 import {
 	pink500 as contextMenuIconColor,

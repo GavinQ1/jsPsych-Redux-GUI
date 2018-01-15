@@ -6,15 +6,15 @@ import Divider from 'material-ui/Divider';
 import { List } from 'material-ui/List';
 import { SpeedDial, SpeedDialItem } from 'react-mui-speeddial';
 
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import NewTimelineIcon from 'material-ui/svg-icons/av/playlist-add';
-import NewTrialIcon from 'material-ui/svg-icons/action/note-add';
-import Delete from 'material-ui/svg-icons/action/delete';
-import Duplicate from 'material-ui/svg-icons/content/content-copy';
+import ContentAdd from 'material-ui-icons/Add';
+import NavigationClose from 'material-ui-icons/Close';
+import NewTimelineIcon from 'material-ui-icons/PlaylistAdd';
+import NewTrialIcon from 'material-ui-icons/NoteAdd';
+import Delete from 'material-ui-icons/Delete';
+import Duplicate from 'material-ui-icons/ContentCopy';
 
-import CloseDrawerHandle from 'material-ui/svg-icons/navigation/chevron-left';
-import OpenDrawer from 'material-ui/svg-icons/navigation/chevron-right';
+import CloseDrawerHandle from 'material-ui-icons/ChevronLeft';
+import OpenDrawer from 'material-ui-icons/ChevronRight';
 import {
 	grey300 as popDrawerColor,
 	grey400 as DrawerHandleColor,

@@ -9,11 +9,11 @@ import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 
-import ContentAdd from 'material-ui/svg-icons/content/add';
-// import ObjectEditorIcon from 'material-ui/svg-icons/editor/mode-edit';
-import Clear from 'material-ui/svg-icons/content/delete-sweep';
-import CopyIcon from 'material-ui/svg-icons/content/content-copy';
-import PasteIcon from 'material-ui/svg-icons/content/content-paste';
+import ContentAdd from 'material-ui-icons/Add';
+// import ObjectEditorIcon from 'material-ui-icons/ModeEdit';
+import Clear from 'material-ui-icons/DeleteSweep';
+import CopyIcon from 'material-ui-icons/ContentCopy';
+import PasteIcon from 'material-ui-icons/ContentPaste';
 import {
   cyan500 as hoverColor,
   grey100 as toolbarColor,

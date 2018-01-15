@@ -6,7 +6,7 @@ Repeatedly used components
 
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
-import Close from 'material-ui/svg-icons/navigation/close';
+import Close from 'material-ui-icons/Close';
 import {
 	grey50 as dialogTitleColor,
 	grey300 as CloseBackHighlightColor,

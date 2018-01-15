@@ -6,9 +6,9 @@ import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 
-import Profile from 'material-ui/svg-icons/social/person';
-import ExperimentIcon from 'material-ui/svg-icons/action/book';
-import SignOut from 'material-ui/svg-icons/action/exit-to-app';
+import Profile from 'material-ui-icons/Person';
+import ExperimentIcon from 'material-ui-icons/Book';
+import SignOut from 'material-ui-icons/ExitToApp';
 import {
   indigo500 as hoverColor,
   cyan500 as iconColor,

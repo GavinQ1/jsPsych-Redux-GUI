@@ -5,9 +5,9 @@ import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import MenuItem from 'material-ui/MenuItem';
 
-import Success from 'material-ui/svg-icons/action/check-circle';
-import Warning from 'material-ui/svg-icons/alert/warning';
-import Fail from 'material-ui/svg-icons/alert/error';
+import Success from 'material-ui-icons/CheckCircle';
+import Warning from 'material-ui-icons/Warning';
+import Fail from 'material-ui-icons/Error';
 import {
 	grey50 as dialogBodyColor,
   	green500 as successColor,

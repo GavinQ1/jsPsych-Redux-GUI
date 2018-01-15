@@ -3,7 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import Subheader from 'material-ui/Subheader';
 import FlatButton from 'material-ui/FlatButton';
 
-import Warning from 'material-ui/svg-icons/alert/warning';
+import Warning from 'material-ui-icons/Warning';
 import {
 	grey50 as dialogBodyColor,
   	yellow600 as warningColor,

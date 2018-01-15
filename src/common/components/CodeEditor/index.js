@@ -8,10 +8,10 @@ import Subheader from 'material-ui/Subheader';
 import CodeMirror from 'react-codemirror';
 require('codemirror/lib/codemirror.css');
 
-import ButtonIcon from 'material-ui/svg-icons/action/code';
-import Uncheck from 'material-ui/svg-icons/toggle/star-border';
-import Check from 'material-ui/svg-icons/toggle/star';
-// import DialogIcon from 'material-ui/svg-icons/content/create';
+import ButtonIcon from 'material-ui-icons/Code';
+import Uncheck from 'material-ui-icons/StarBorder';
+import Check from 'material-ui-icons/Star';
+// import DialogIcon from 'material-ui-icons/Create';
 import {
   cyan500 as hoverColor,
   grey800 as normalColor,

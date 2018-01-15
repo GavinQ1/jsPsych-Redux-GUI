@@ -11,11 +11,11 @@ import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import Delete from 'material-ui/svg-icons/action/delete-forever';
-import Duplicate from 'material-ui/svg-icons/content/content-copy';
-import ExperimentIcon from 'material-ui/svg-icons/action/assessment';
-import Repository from 'material-ui/svg-icons/device/storage';
+import MoreVertIcon from 'material-ui-icons/MoreVert';
+import Delete from 'material-ui-icons/DeleteForever';
+import Duplicate from 'material-ui-icons/ContentCopy';
+import ExperimentIcon from 'material-ui-icons/Assessment';
+import Repository from 'material-ui-icons/Storage';
 import {
 	grey100 as dialogBodyColor,
 	indigo500 as hoverColor,

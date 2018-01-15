@@ -7,12 +7,12 @@ import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import { List, ListItem } from 'material-ui/List';
 
-import AddTimelineVarIcon from 'material-ui/svg-icons/action/swap-horiz';
-// import DialogIcon from 'material-ui/svg-icons/action/shopping-basket';
-import UncheckStar from 'material-ui/svg-icons/toggle/star-border';
-import CheckStar from 'material-ui/svg-icons/toggle/star';
-import CheckNoIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank';
-import CheckYesIcon from 'material-ui/svg-icons/toggle/check-box';
+import AddTimelineVarIcon from 'material-ui-icons/SwapHoriz';
+// import DialogIcon from 'material-ui-icons/ShoppingBasket';
+import UncheckStar from 'material-ui-icons/StarBorder';
+import CheckStar from 'material-ui-icons/Star';
+import CheckNoIcon from 'material-ui-icons/CheckBoxOutlineBlank';
+import CheckYesIcon from 'material-ui-icons/CheckBox';
 import {
 	cyan500 as checkColor,
 	// blue500 as titleIconColor,

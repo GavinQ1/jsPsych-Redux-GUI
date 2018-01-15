@@ -10,10 +10,10 @@ import { ListItem } from 'material-ui/List';
 import { GridTile } from 'material-ui/GridList';
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar'; // , ToolbarSeparator, ToolbarTitle
 
-import Save from 'material-ui/svg-icons/content/save';
-import New from 'material-ui/svg-icons/action/note-add';
-import SaveAs from 'material-ui/svg-icons/content/content-copy';
-import DIYDeploy from 'material-ui/svg-icons/action/work';
+import Save from 'material-ui-icons/Save';
+import New from 'material-ui-icons/NoteAdd';
+import SaveAs from 'material-ui-icons/ContentCopy';
+import DIYDeploy from 'material-ui-icons/Work';
 import {
   cyan500 as hoverColor,
   grey100 as dialogBodyColor

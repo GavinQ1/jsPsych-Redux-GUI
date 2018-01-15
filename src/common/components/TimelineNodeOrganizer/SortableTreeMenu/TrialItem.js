@@ -3,7 +3,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import { ListItem } from 'material-ui/List';
  
-import TrialIcon from 'material-ui/svg-icons/editor/mode-edit';
+import TrialIcon from 'material-ui-icons/ModeEdit';
 
 import {
 	indigo500 as iconHighlightColor,

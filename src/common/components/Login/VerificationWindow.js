@@ -6,8 +6,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Snackbar from 'material-ui/Snackbar';
 
-import Verified from 'material-ui/svg-icons/action/verified-user';
-import Sent from 'material-ui/svg-icons/action/check-circle';
+import Verified from 'material-ui-icons/VerifiedUser';
+import Sent from 'material-ui-icons/CheckCircle';
 import {
   green500 as verifyColor
 } from 'material-ui/styles/colors';

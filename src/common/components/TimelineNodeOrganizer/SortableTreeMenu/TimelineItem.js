@@ -2,8 +2,8 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import { ListItem } from 'material-ui/List';
 
-import CollapsedIcon from 'material-ui/svg-icons/navigation/chevron-right';
-import ExpandedIcon from 'material-ui/svg-icons/navigation/expand-more';
+import CollapsedIcon from 'material-ui-icons/ChevronRight';
+import ExpandedIcon from 'material-ui-icons/ExpandMore';
 
 import {
 	cyan400 as highlightColor,

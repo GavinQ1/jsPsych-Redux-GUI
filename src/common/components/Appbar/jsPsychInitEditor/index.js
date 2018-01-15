@@ -11,9 +11,9 @@ import {
   green500 as checkColor,
   blue500 as titleIconColor
 } from 'material-ui/styles/colors';
-import InitSettingIcon from 'material-ui/svg-icons/action/build';
-import CheckIcon from 'material-ui/svg-icons/toggle/radio-button-checked';
-import UnCheckIcon from 'material-ui/svg-icons/toggle/radio-button-unchecked';
+import InitSettingIcon from 'material-ui-icons/Build';
+import CheckIcon from 'material-ui-icons/RadioButtonChecked';
+import UnCheckIcon from 'material-ui-icons/RadioButtonUnchecked';
 
 import CodeEditor from '../../CodeEditor';
 import { renderDialogTitle } from '../../gadgets';

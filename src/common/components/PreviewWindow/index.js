@@ -5,11 +5,11 @@ import deepEqual from 'deep-equal';
 import IconButton from 'material-ui/IconButton';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 
-import Play from 'material-ui/svg-icons/av/play-arrow';
-import Refresh from 'material-ui/svg-icons/navigation/refresh';
-// import Skip from 'material-ui/svg-icons/av/skip-next';
-import FullScreen from 'material-ui/svg-icons/navigation/fullscreen';
-import FullScreenExit from 'material-ui/svg-icons/navigation/fullscreen-exit';
+import Play from 'material-ui-icons/PlayArrow';
+import Refresh from 'material-ui-icons/Refresh';
+// import Skip from 'material-ui-icons/SkipNext';
+import FullScreen from 'material-ui-icons/Fullscreen';
+import FullScreenExit from 'material-ui-icons/FullscreenExit';
 
 import { jsPsych_Display_Element } from '../../reducers/Experiment/jsPsychInit';
 import { Welcome } from '../../backend/deploy';

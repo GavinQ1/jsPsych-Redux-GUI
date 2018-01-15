@@ -19,16 +19,16 @@ import {
 	grey800 as previewIconColor,
 	grey400
 } from 'material-ui/styles/colors';
-import Add from 'material-ui/svg-icons/av/library-add';
-import Media from 'material-ui/svg-icons/action/shopping-cart';
-import MediaManagerIcon from 'material-ui/svg-icons/image/photo-library';
-import ImageIcon from 'material-ui/svg-icons/image/photo';
-import MovieIcon from 'material-ui/svg-icons/image/movie-creation';
-import AudioIcon from 'material-ui/svg-icons/image/audiotrack';
-import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file';
-import PDFIcon from 'material-ui/svg-icons/image/picture-as-pdf';
-import CheckNoIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank';
-import CheckYesIcon from 'material-ui/svg-icons/toggle/check-box';
+import Add from 'material-ui-icons/LibraryAdd';
+import Media from 'material-ui-icons/ShoppingCart';
+import MediaManagerIcon from 'material-ui-icons/PhotoLibrary';
+import ImageIcon from 'material-ui-icons/Photo';
+import MovieIcon from 'material-ui-icons/MovieCreation';
+import AudioIcon from 'material-ui-icons/Audiotrack';
+import FileIcon from 'material-ui-icons/InsertDriveFile';
+import PDFIcon from 'material-ui-icons/PictureAsPdf';
+import CheckNoIcon from 'material-ui-icons/CheckBoxOutlineBlank';
+import CheckYesIcon from 'material-ui-icons/CheckBox';
 
 import { renderDialogTitle } from '../gadgets';
 import Notification from '../../containers/Notification';
