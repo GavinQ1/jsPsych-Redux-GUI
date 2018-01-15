@@ -335,7 +335,7 @@ function generateTrialBlock(state, trial, all=false, deploy=false, parameterInfo
           break;
       }
       if (value === null || value === undefined) {
-        error.push(key);
+        error.push(parameterInfo[key].pretty_name);
       }
     }
 

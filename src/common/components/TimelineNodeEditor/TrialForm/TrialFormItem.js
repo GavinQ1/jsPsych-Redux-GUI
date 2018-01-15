@@ -115,7 +115,9 @@ const generateFieldProps = (parameterValue, parameterInfo) => {
 		disabled: disabled,
 		label: parameterInfo.pretty_name,
 		title: parameterInfo.pretty_name,
-		required: isRequired
+		required: isRequired,
+		helperText: error ? 'This field is required.' : '',
+		error: error,
 	}
 }
 
@@ -363,6 +365,7 @@ export default class TrialFormItem extends React.Component {
 		let node = (
 			<TextField
 			  select
+			  fullWidth
 	          onChange={(e) => { this.props.setToggle(param, e.target.value)}}
 	          {...props}
 	        >
@@ -476,7 +479,7 @@ export default class TrialFormItem extends React.Component {
 		let node = (
 			<TextField
 		      id={this.props.id+"-text-field-"+param}
-		      fullWidth={true}
+		      fullWidth
 		      onChange={(e) => { this.setKeyListStr(e.target.value); }}
 		      maxLength={(isArray) ?  null : "1"}
 		      onFocus={() => {
@@ -523,6 +526,7 @@ export default class TrialFormItem extends React.Component {
 
 		let node = (
 			<TextField
+				fullWidth
 				select
 		    	onChange={(e) => {
 		    		this.props.setText(param, e.target.value);
