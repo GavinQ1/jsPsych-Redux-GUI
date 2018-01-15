@@ -1,4 +1,4 @@
-import { deepCopy, convertEmptyStringToNull, injectJsPsychUniversalPluginParameters } from '../../utils';
+import { deepCopy, strToNull, injectJsPsychUniversalPluginParameters } from '../../utils';
 import { createFuncObj } from './jsPsychInit';
 
 const jsPsych = window.jsPsych;
@@ -241,7 +241,7 @@ export function changePlugin(state, action) {
 		if (paramInfo.type === EnumPluginType.COMPLEX) {
 			defaultValue = [];
 		} else {
-			defaultValue = convertEmptyStringToNull(paramInfo.default);
+			defaultValue = strToNull(paramInfo.default);
 		}
 
 		// ***** Current converting is all shallow *****

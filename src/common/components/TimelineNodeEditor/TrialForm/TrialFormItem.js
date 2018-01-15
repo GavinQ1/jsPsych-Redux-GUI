@@ -1,9 +1,9 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
+import TextField from 'material-ui-next/TextField';
+import { MenuItem } from 'material-ui-next/Menu';
+import IconButton from 'material-ui-next/IconButton';
+import Tooltip from 'material-ui-next/Tooltip';
 import AutoComplete from 'material-ui/AutoComplete';
-import SelectField from 'material-ui/SelectField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 // import Divider from 'material-ui/Divider';
 // import { ListItem } from 'material-ui/List';
@@ -26,7 +26,7 @@ import {
   pink500 as falseColor
 } from 'material-ui/styles/colors';
 
-import { convertNullToEmptyString, deepCopy } from '../../../utils';
+import { nullToStr, deepCopy } from '../../../utils';
 import MediaManager from '../../../containers/MediaManager';
 import { MediaManagerMode } from '../../MediaManager';
 import CodeEditor from '../../CodeEditor';
@@ -95,7 +95,7 @@ const isParameterRequired = (parameterInfo) => {
 
 const generateFieldProps = (parameterValue, parameterInfo) => {
 	let isRequired = isParameterRequired(parameterInfo);
-	let val = convertNullToEmptyString(parameterValue.value);
+	let val = nullToStr(parameterValue.value);
 	let disabled = true;
 	let error = isRequired && (val === '' || val === {} || val === null || val === undefined || val === []);  
 
@@ -113,8 +113,9 @@ const generateFieldProps = (parameterValue, parameterInfo) => {
 	return {
 		value: val,
 		disabled: disabled,
-		floatingLabelText: parameterInfo.pretty_name,
-		errorText: error ? 'This parameter is required.' : '',
+		label: parameterInfo.pretty_name,
+		title: parameterInfo.pretty_name,
+		required: isRequired
 	}
 }
 
@@ -235,7 +236,7 @@ export default class TrialFormItem extends React.Component {
 			    	setParamMode={() => { this.props.setParamMode(param); }}
 					useFunc={parameterValue.mode === ParameterMode.USE_FUNC}
 					showEditMode={true}
-					initCode={convertNullToEmptyString(parameterValue.func.code)} 
+					initCode={nullToStr(parameterValue.func.code)} 
 					openCallback={this.showFuncEditor}
 					closeCallback={this.hideFuncEditor}
                     submitCallback={(newCode) => { 
@@ -288,13 +289,9 @@ export default class TrialFormItem extends React.Component {
 
 		switch(parameterValue.mode) {
 			case ParameterMode.USE_FUNC:
-				return <MenuItem primaryText="[Custom Code]" style={{paddingTop: 2}} disabled={true} />;
+				return <MenuItem disabled={true}>[Custom Code]</MenuItem>;
 			case ParameterMode.USE_TV:
-				return <MenuItem
-							primaryText="[Timeline Variable]"
-							style={{paddingTop: 2}} 
-							title={parameterValue.timelineVariable}
-							disabled={true} />;
+				return <MenuItem disabled={true} title={parameterValue.timelineVariable}>[Timeline Variable]</MenuItem>
 			default:
 				return node;
 		}
@@ -304,13 +301,13 @@ export default class TrialFormItem extends React.Component {
 		let parameterValue = locateNestedParameterValue(this.props.parameters, param);
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
 
+		let props = generateFieldProps(parameterValue, parameterInfo);
 		let node = (
 			<TextField
 			      id={"text-field-"+param}
-			      min={-1}
 			      fullWidth={true}
-			      onChange={(e, v) => { this.props.setText(param, v); }}
-			      {...generateFieldProps(parameterValue, parameterInfo)}
+			      onChange={(e) => { this.props.setText(param, e.target.value); }}
+			      {...props}
 			    />
 		);
 
@@ -335,8 +332,8 @@ export default class TrialFormItem extends React.Component {
 			      type="number"
 			      id={"number-field-"+param}
 			      fullWidth={true}
-			      onChange={(e, v) => {
-						this.props.setNumber(param, v, EnumPluginType.FLOAT===this.props.paramInfo.type);
+			      onChange={(e) => {
+						this.props.setNumber(param, e.target.value, EnumPluginType.FLOAT===this.props.paramInfo.type);
 					}}
 				  {...props}
 			    />
@@ -356,22 +353,21 @@ export default class TrialFormItem extends React.Component {
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
 
 		let items = [
-			<MenuItem key={`toggle-field-${param}-1`} value={true}  primaryText="True"/>,
-			<MenuItem key={`toggle-field-${param}-2`} value={false}  primaryText="False"/>
+			<MenuItem key={`toggle-field-${param}-1`} value={true.toString()}>True</MenuItem>,
+			<MenuItem key={`toggle-field-${param}-2`} value={false.toString()}>False</MenuItem>
 		];
 
 		let props = generateFieldProps(parameterValue, parameterInfo);
+		props.value = props.value.toString();
 
 		let node = (
-			<SelectField
-	          onChange={(event, index, value) => { this.props.setToggle(param, value)}}
-	          floatingLabelFixed={true}
-	          labelStyle={{color: SelectLableColor(props.value)}}
-	          selectedMenuItemStyle={{color: SelectLableColor(props.value)}}
+			<TextField
+			  select
+	          onChange={(e) => { this.props.setToggle(param, e.target.value)}}
 	          {...props}
 	        >
 	          {items}
-	        </SelectField>
+	        </TextField>
 		)
 
 		return (
@@ -386,7 +382,7 @@ export default class TrialFormItem extends React.Component {
 
 		let parameterValue = locateNestedParameterValue(this.props.parameters, param);
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
-		let node = (<MenuItem primaryText="[Undefined]" style={{paddingTop: 2}} disabled={true} />);
+		let node = (<MenuItem disabled={true}>[Undefined]</MenuItem>);
 
 		return (
 		<div style={{display: 'flex', width: "100%", position: 'relative'}}>
@@ -394,7 +390,7 @@ export default class TrialFormItem extends React.Component {
 	      	<div className="Trial-Form-Content-Container" onMouseEnter={this.showTool} onMouseLeave={this.hideTool} >
 	      		{this.renderFieldContent(param, node, false)}
 			    <CodeEditor 
-					initCode={convertNullToEmptyString(parameterValue.func.code)} 
+					initCode={nullToStr(parameterValue.func.code)} 
                     submitCallback={(newCode) => { 
                       this.props.setFunc(param, newCode);
                     }}
@@ -456,23 +452,24 @@ export default class TrialFormItem extends React.Component {
 		let isArray = !!parameterInfo.array;
 
 		let toggleAllKey = (
-			<IconButton 
-				onTouchTap={() => {
-					if (isAllKey) {
-						this.props.setKey(param, null, true);
-					} else {
-						this.props.setKey(param, jsPsych.ALL_KEYS, true);
-					}
-				}}
-				tooltip="All Keys"
-				onMouseEnter={this.hideTool} onMouseLeave={this.showTool}
-			>
-				{(isAllKey) ? <BoxCheckIcon color={boxCheckColor} /> : <BoxUncheckIcon />}
-			</IconButton>
+			<Tooltip title="All Keys">
+				<IconButton 
+					onTouchTap={() => {
+						if (isAllKey) {
+							this.props.setKey(param, null, true);
+						} else {
+							this.props.setKey(param, jsPsych.ALL_KEYS, true);
+						}
+					}}
+					onMouseEnter={this.hideTool} onMouseLeave={this.showTool}
+				>
+					{(isAllKey) ? <BoxCheckIcon color={boxCheckColor} /> : <BoxUncheckIcon />}
+				</IconButton>
+			</Tooltip>
 		);
 
 		let props = generateFieldProps(parameterValue, parameterInfo);
-		value = this.state.useKeyListStr ? this.state.keyListStr : convertNullToEmptyString(value);
+		value = this.state.useKeyListStr ? this.state.keyListStr : nullToStr(props.value);
 		props.value = isAllKey ? '[ALL KEYS]' : value;
 		props.disabled = props.disabled || isAllKey;
 
@@ -480,10 +477,10 @@ export default class TrialFormItem extends React.Component {
 			<TextField
 		      id={this.props.id+"-text-field-"+param}
 		      fullWidth={true}
-		      onChange={(e, v) => { this.setKeyListStr(v); }}
+		      onChange={(e) => { this.setKeyListStr(e.target.value); }}
 		      maxLength={(isArray) ?  null : "1"}
 		      onFocus={() => {
-		      	this.setKeyListStr(convertNullToEmptyString(value));
+		      	this.setKeyListStr(nullToStr(value));
 		      	this.setState({
 		      		useKeyListStr: true
 		      	});
@@ -506,6 +503,7 @@ export default class TrialFormItem extends React.Component {
 		let funcMode = parameterValue.mode == ParameterMode.USE_FUNC;
 		let tvMode = parameterValue.mode == ParameterMode.USE_TV;
 		let inOtherMode = funcMode || tvMode;
+
 		return (
 			<div className="Trial-Form-Item-Container">
 		    	{node}
@@ -521,20 +519,22 @@ export default class TrialFormItem extends React.Component {
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
 
 		let props = generateFieldProps(parameterValue, parameterInfo);
+		delete props.type;
 
 		let node = (
-			<SelectField
-		    	onChange={(event, index, value) => {
-		    		this.props.setText(param, value);
+			<TextField
+				select
+		    	onChange={(e) => {
+		    		this.props.setText(param, e.target.value);
 		    	}}
 		    	{...props}
 		    >
 		    	{
 		    		this.props.paramInfo.options.map((op, i) => (
-		    			<MenuItem value={op} primaryText={op} key={op+"-"+i}/>
+		    			<option value={op} key={op+"-"+i}>{op}</option>
 		    		))
 		    	}
-		    </SelectField>
+		    </TextField>
 		)
 
 		return (
@@ -561,8 +561,8 @@ export default class TrialFormItem extends React.Component {
 					rows={1}
 					fullWidth={true}
 					value={(this.state.useFileStr)? this.state.fileListStr : selectedFilesString}
-					onChange={(e, v) => { 
-						this.setFileListStr(v); 
+					onChange={(e) => { 
+						this.setFileListStr(e.target.value); 
 					}}
 					onFocus={() => {
 						this.setFileListStr(selectedFilesString);
@@ -684,15 +684,16 @@ export default class TrialFormItem extends React.Component {
 		let parameterValue = locateNestedParameterValue(this.props.parameters, param);
 		let parameterInfo = locateNestedParameterInfo(this.props.paramInfo, param);
 		let node = (
-			<IconButton
-  				tooltip={(this.state.subFormCollapse) ? "Expand" : "Collapse"}
-  				onTouchTap={this.toggleSubFormCollapse}
-  			>
-  			{(this.state.subFormCollapse) ? 
-  				<CollapseIcon hoverColor={hoverColor} /> :
-  				<ExpandIcon hoverColor={hoverColor} />
-  			}
-  			</IconButton>
+			<Tooltip title={(this.state.subFormCollapse) ? "Expand" : "Collapse"}>
+				<IconButton
+	  				onTouchTap={this.toggleSubFormCollapse}
+	  			>
+	  			{(this.state.subFormCollapse) ? 
+	  				<CollapseIcon hoverColor={hoverColor} /> :
+	  				<ExpandIcon hoverColor={hoverColor} />
+	  			}
+	  			</IconButton>
+  			</Tooltip>
 		)
 
 		return (

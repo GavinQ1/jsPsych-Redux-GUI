@@ -43,9 +43,9 @@ export function deepCopy(target) {
 	}
 }
 
-export const convertEmptyStringToNull = (s) => ((s === '') ? null : s);
+export const strToNull = (s) => ((s === '') ? null : s);
 
-export const convertNullToEmptyString = (s) => ((s === null) ? '' : s);
+export const nullToStr = (s) => ((s === null) ? '' : s);
 
 export function getUUID() {
 	var translator = short();

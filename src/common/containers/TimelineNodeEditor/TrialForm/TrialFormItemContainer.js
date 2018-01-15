@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import TrialFormItem from '../../../components/TimelineNodeEditor/TrialForm/TrialFormItem';
 import * as editorActions from '../../../actions/editorActions';
-import { convertEmptyStringToNull } from '../../../utils';
+import { strToNull } from '../../../utils';
 import { ParameterMode, locateNestedParameterValue, createComplexDataObject } from '../../../reducers/Experiment/editor';
 import { MediaPathTag } from '../../../backend/deploy';
 import * as notify from '../../Notification';
@@ -11,14 +11,14 @@ const onChangePluginType = (dispatch, newPluginVal) => {
 }
 
 const setFunc = (dispatch, key, code, funcOnly=false) => {
-	dispatch(editorActions.setPluginParamAction(key, convertEmptyStringToNull(code), ParameterMode.USE_FUNC));
+	dispatch(editorActions.setPluginParamAction(key, strToNull(code), ParameterMode.USE_FUNC));
 	if (funcOnly) {
 		dispatch(editorActions.setPluginParamModeAction(key, ParameterMode.USE_FUNC, false));
 	}
 }
 
 const setTimelineVariable = (dispatch, key, tv) => {
-	dispatch(editorActions.setPluginParamAction(key, convertEmptyStringToNull(tv), ParameterMode.USE_TV));
+	dispatch(editorActions.setPluginParamAction(key, strToNull(tv), ParameterMode.USE_TV));
 }
 
 const setParamMode = (dispatch, key, mode=ParameterMode.USE_FUNC) => {
@@ -26,7 +26,7 @@ const setParamMode = (dispatch, key, mode=ParameterMode.USE_FUNC) => {
 }
 
 const setText = (dispatch, key, value) => {
-	dispatch(editorActions.setPluginParamAction(key, convertEmptyStringToNull(value)));
+	dispatch(editorActions.setPluginParamAction(key, strToNull(value)));
 }
 
 const setObject = (dispatch, key, obj) => {
@@ -74,9 +74,8 @@ const setToggle = (dispatch, key, flag) => {
 	dispatch(editorActions.setPluginParamAction(key, flag));
 }
 
-function isNumeric(n) { return !isNaN(parseFloat(n)) && isFinite(n); }
 const setNumber = (dispatch, key, value, isFloat) => {
-	dispatch(editorActions.setPluginParamAction(key, convertEmptyStringToNull(value)));
+	dispatch(editorActions.setPluginParamAction(key, strToNull(value)));
 }
 
 const insertFile = (dispatch, key, s3files, multiSelect, selected, handleClose) => {

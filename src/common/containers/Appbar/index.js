@@ -12,8 +12,8 @@ import {
 	notifyWarningBySnackbar
 } from '../Notification';
 import {
-	convertEmptyStringToNull,
-	convertNullToEmptyString
+	strToNull,
+	nullToStr
 } from '../../utils';
 import { pushState } from '../../backend/dynamoDB';
 import { diyDeploy as $diyDeploy } from '../../backend/deploy';
@@ -25,7 +25,7 @@ import {
 
 
 const changeExperimentName = (dispatch, text) => {
-	text = convertEmptyStringToNull(text);
+	text = strToNull(text);
 	dispatch(experimentSettingActions.setExperimentNameAction(text));
 }
 
@@ -142,7 +142,7 @@ const diyDeploy = (dispatch, progressHook) => {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		experimentName: convertNullToEmptyString(state.experimentState.experimentName),
+		experimentName: nullToStr(state.experimentState.experimentName),
 	}
 };
 

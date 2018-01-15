@@ -4,7 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 
 import { labelStyle } from '../TrialForm/TrialFormItem';
-import { convertNullToEmptyString } from '../../../utils';
+import { nullToStr } from '../../../utils';
 import TimelineVariableTable from '../../../containers/TimelineNodeEditor/TimelineForm/TimelineVariableTableContainer';
 import CodeEditor from '../../CodeEditor';
 
@@ -47,7 +47,7 @@ class TimelineForm extends React.Component {
 					<div className="Trial-Form-Content-Container">
 						<TextField
 							id="Timeline_SampleSize_Input"
-							value={convertNullToEmptyString(this.props.samplingSize)}
+							value={nullToStr(this.props.samplingSize)}
 							fullWidth={true}
 							onChange={(event, newVal) => this.props.setSampleSize(newVal)} />
 					</div>
