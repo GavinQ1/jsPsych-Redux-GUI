@@ -521,7 +521,6 @@ export default class TrialFormItem extends React.Component {
 		return (
 			<div className="Trial-Form-Item-Container">
 		    	{node}
-		    	{this.appendArrayEditor(param)}
 		    	{inOtherMode ? null : toggleAllKey}
 		    	{isAllKey ? null : this.appendFunctionEditor(param)}
 				{isAllKey ? null : this.appendTimelineVariable(param)}
