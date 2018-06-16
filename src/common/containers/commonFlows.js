@@ -75,7 +75,7 @@ export const pushExperiment = ({experimentState, userId=null}) => {
 	// Register experimentState for pushing to AWS
 	// Fill in ownerId, experimentId, createDate if these info are missing
 	// Update lastModifiedDate
-	experimentState = core.registerExperiment({
+	experimentState = core.prepareExperimentForSave({
 		experimentState,
 		userId
 	});
@@ -91,11 +91,12 @@ export const pushExperiment = ({experimentState, userId=null}) => {
 * Helper for handling the action of saving experiment and giving user response
 * 
 */
-const $saveExperiment = ({
+export const $saveExperiment = ({
 		dispatch,
 		experimentState,
 		userId = null,
 		displayNotification = true,
+		message = "Saved !"
 	}) => {
 	// push experiment first
 	return pushExperiment({
@@ -113,7 +114,7 @@ const $saveExperiment = ({
 		if (displayNotification) {
 			utils.notifications.notifySuccessBySnackbar({
 				dispatch,
-				message: "Saved !"
+				message,
 			});
 		}
 		return Promise.resolve();

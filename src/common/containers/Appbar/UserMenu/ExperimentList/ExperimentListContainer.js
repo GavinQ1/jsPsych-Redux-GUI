@@ -14,15 +14,11 @@ const pullExperiment = ({dispatch, targetExperimentId, saveFirst=false}) => {
 	}
 	return $save().then(() => {
 		return myaws.DynamoDB.getExperimentById(targetExperimentId).then((data) => {
-			utils.commonFlows.loadExperimentToLocal({
+			return utils.commonFlows.$saveExperiment({
 				dispatch,
-				experimentState: data.Item.fetch
-			});
-			utils.notifications.notifySuccessBySnackbar({
-				dispatch,
+				experimentState: data.Item.fetch,
 				message: "Opened !"
 			});
-			return Promise.resolve();
 		});
 	});
 }

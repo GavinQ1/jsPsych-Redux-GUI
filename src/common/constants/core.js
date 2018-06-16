@@ -142,19 +142,24 @@ export const duplicateExperiment = ({sourceExperimentState, newName=null}) => {
 * Assign it an experiment id (UUID) if necessary
 * Stamp create date and last modified date if necessary
 */
-export const registerExperiment = ({experimentState, userId=null}) => {
+export const prepareExperimentForSave = ({experimentState, userId=null}) => {
 	experimentState = utils.deepCopy(experimentState);
+
+	// fill in owner id if missing
 	if (!experimentState.ownerId) {
 		experimentState.ownerId = userId;
 	}
+	// fill in experiment id if missing
 	if (!experimentState.experimentId) {
 		experimentState.experimentId = generateExperimentId();
 	}
 
+	// fill in create data if missing
 	let now = Date.now();
 	if (!experimentState.createDate) {
 		experimentState.createDate = now;
 	}
+	// timestamp last modified date
 	experimentState.lastModifiedDate = now;
 
 	return experimentState;

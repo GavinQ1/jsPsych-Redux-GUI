@@ -45,7 +45,7 @@ const clickNewExperiment = ({dispatch}) => {
 			let newExperiment = core.getInitExperimentState();
 			dispatch(actions.actionCreator({
 				type: actions.ActionTypes.LOAD_EXPERIMENT,
-				experimentState: core.registerExperiment({
+				experimentState: core.prepareExperimentForSave({
 					experimentState: newExperiment,
 					userId: getState().userState.userId
 				}),
